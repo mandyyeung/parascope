@@ -66,10 +66,6 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-<<<<<<< HEAD
     params.require(:article).permit(:id, :title, :url, :collection_ids => [])
-=======
-    params.require(:article).permit(:title, :url)
->>>>>>> 50e003bef1f8851ca8033f2f09e203ebfdf3a62b
   end
 end
