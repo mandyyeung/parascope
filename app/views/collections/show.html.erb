@@ -1,7 +1,6 @@
-<div class="collection">
-<ul class ='group'>
-  <h2><%= @collection.name %> <%= link_to '+', new_collection_article_path(@collection) %></h2>
-  <h4>[ <%= link_to 'Edit', edit_collection_path(@collection) %> ]</h4>
+<h2 class="section-title ribbon"><span>My Top Links <%= @collection.name %> <%= link_to '+', new_collection_article_path(@collection) %>[ <%= link_to 'Edit', edit_collection_path(@collection) %> ]</span></h2>
+<div class="entries">
+  <div class="row">
 <% @collection.articles.each do |article|  %>
   <% if !article.archived? %>
 	   <li class='link'><%= link_to article.title, article.linkify, :target => "_blank" %>
