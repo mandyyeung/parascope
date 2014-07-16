@@ -1,5 +1,7 @@
+<% title "Collections" %>
+
 <h2 class="section-title ribbon"><span>My Top Links <%= link_to '+', new_collection_article_path(current_user.collections.find_by_slug('unsorted')) %></span></h2>
-        
+
 <div class="entries">
   <div class="row">
       <% if @articles.flatten.count > 0 %>
@@ -16,5 +18,3 @@
       <% end %>
   </div>
 </div>
-
-
