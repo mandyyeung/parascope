@@ -1,9 +1,45 @@
-<h2 class="section-title ribbon"><span>My Top Links <%= @collection.name %> <%= link_to '+', new_collection_article_path(@collection) %>[ <%= link_to 'Edit', edit_collection_path(@collection) %> ]</span></h2>
+<script language="javascript">
+         var getJSON = function(url, successHandler, errorHandler) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('get', url, true);
+            alert("-------" + url);
+            //xhr.responseType = 'json';
+            xhr.onload = function() {
+               var status = xhr.status;
+               alert("===========" + status);
+               if (status == 200) {
+                  successHandler && successHandler(xhr.response);
+               } else {
+                  errorHandler && errorHandler(status);
+               }
+            };
+            xhr.send();
+         };
+
+        function getReading() {
+            var url = "http://www.buzzfeed.com/samstryker/call-edison-twentysomethings-need-some-inventions"
+            $.getJSON("https://www.readability.com/api/content/v1/parser?url="+ url +"&token=1b830931777ac7c2ac954e9f0d67df437175e66e",
+            function (data) {
+              alert(data.content);
+          });
+        }
+      </script>
+
+<h2 class="section-title ribbon"><span><%= link_to @collection.name, edit_collection_path(@collection) %> <%= link_to '+', new_collection_article_path(@collection) %></span></h2>
 <div class="entries">
   <div class="row">
 <% @collection.articles.each do |article|  %>
   <% if !article.archived? %>
 	   <li class='link'><%= link_to article.title, article.linkify, :target => "_blank" %>
+      <br>
+      <a href="#openModal-<%= article.id %>" class="read">Read</a>
+      <div id="openModal-<%= article.id %>" class="modalDialog">
+      	<div>
+      		<a href="#close" title="Close" class="close">X</a>
+      		<h2><%= article.title %></h2>
+          <%= article.readability %>
+        </div>
+      </div>
       <%= button_to 'archive', archive_path(@collection, article) %>
       <%= button_to 'edit', edit_collection_article_path(@collection, article), method: :get %>
       Priority: <%= article.priority %>
@@ -19,5 +55,3 @@
 	<% end %>
 </ul>
 </div>
-
-

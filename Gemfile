@@ -42,6 +42,8 @@ gem 'spring',        group: :development
 # User authentication
 gem 'devise'
 
+gem 'rest-client', '~> 1.7.2'
+
 group :test do
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
