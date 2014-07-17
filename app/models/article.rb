@@ -36,5 +36,12 @@ class Article < ActiveRecord::Base
     "http://#{link}"
   end
 
+  def readability
+    url = "https://www.readability.com/api/content/v1/parser?url=#{self.linkify}&token=1d8b4f869348fc78387fbcd7fc495dba8890be85"
+    response = RestClient.get(url)
+    parsed_response = JSON.parse(response)
+    parsed_response["content"].html_safe
+  end
+
   accepts_nested_attributes_for :collections
 end
